@@ -1,36 +1,22 @@
-function generatePermutations(arr) {
-    // Проверка, является ли arr массивом
-    if (!Array.isArray(arr)) {
-      console.log('Входной параметр должен быть массивом');
-      return;
-    }
-    
-    // Функция, которая меняет местами два элемента массива
-    function swap(a, b) {
-      const temp = arr[a];
-      arr[a] = arr[b];
-      arr[b] = temp;
-    }
-  
-    // Рекурсивная функция для генерации перестановок
-    function generate(n) {
-      if (n === 1) {
-        console.log(arr);
-        return;
-      }
-      for (let i = 0; i < n; i++) {
-        generate(n - 1);
-        if (n % 2 === 0) {
-          swap(i, n - 1);
-        } else {
-          swap(0, n - 1);
-        }
-      }
-    }
-  
-    generate(arr.length);
-  }
-  
-  // Пример использования функции
-  const array = [1, 2, 3];
-  generatePermutations(array);
+import time
+
+# Отображаем инструкцию для пользователя
+print('Нажмите клавишу Enter, чтобы начать. После этого нажмите клавишу Enter, чтобы "нажать" на секундомер. Нажмите комбинацию клавиш Ctrl-C для останова секундомера и выхода из программы.')
+input()
+print('Начали.')
+startTime = time.time() # стартовое время первого круга
+lastTime = startTime
+lapNum = 1
+
+# Начало отслеживание круга
+try:
+    while True:
+        input()
+        lapTime = round(time.time() - lastTime, 2)
+        totalTime = round(time.time() - startTime, 2)
+        print('Круг #%s: %s (%s)' % (lapNum, totalTime, lapTime), end='')
+        lapNum += 1
+        lastTime = time.time() # сброс времени последнего круга
+except KeyboardInterrupt:
+    # Обработать исключение Ctrl-C, чтобы не отображалось сообщение об ошибке
+    print('\nГотово.')
